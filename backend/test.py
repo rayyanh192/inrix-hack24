@@ -5,16 +5,10 @@ import io
 import os
 from dotenv import load_dotenv
 from CameraImage import get_camera_image
-from CamerasBox import saveOutput
 from Token import get_token
 import re
 
 load_dotenv()
-
-min_id = saveOutput()
-token = get_token()
-
-save_path = get_camera_image(min_id, token)
 
 return_data = ""
 
@@ -40,6 +34,11 @@ def get_rating():
         aws_secret_access_key=secret_access_key,
         region_name="us-west-2",
     )
+
+#     min_id = saveOutput()
+    token = get_token()
+
+    save_path = get_camera_image(token)
 
     image_path = save_path
     with open(image_path, 'rb') as image_file:
@@ -114,8 +113,3 @@ def get_rating():
     final_rating = get_last_integer(cleaned_rating)
     return_data = cleaned_rating
     return final_rating
-
-
-
-rating = get_rating()
-print(rating)
