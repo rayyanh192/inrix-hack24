@@ -9,7 +9,20 @@ import os
 min_id = saveOutput()
 
 token = get_token()
-save_dir = "/Users/rayyan/Documents/inrix-hack24/images"
+
+def check_dir_exists():
+    cur_dir = os.getcwd()
+    images = os.path.join(cur_dir, "images")
+    if (os.path.exists(images)):
+        for filename in os.listdir(images):
+                file_path = os.path.join(images, filename)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+    else:
+        os.makedirs(images)
+
+
+    return images
 
 
 def get_camera_image(min_id, token):
@@ -21,7 +34,9 @@ def get_camera_image(min_id, token):
     response = requests.request("GET", url, headers=headers, data=payload)
 
     image = Image.open(BytesIO(response.content))
-    save_path = os.path.join(save_dir, f"camera_image_{min_id}.jpg")
+
+    images_folder = check_dir_exists()
+    save_path = os.path.join(images_folder, f"camera_image_{min_id}.jpg")
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
     
     image.save(save_path, "JPEG")
