@@ -21,7 +21,7 @@ image_path = '/Users/rayyan/Downloads/postmantraffic3.jpeg'
 with open(image_path, 'rb') as image_file:
     image_binary = image_file.read()
 
-input_text = "Take the image provided, and count the number of cars that you see on the road in the image. Then, output an integer value that says the number of cars"
+input_text = "Take the image provided, and count the number of cars that you see on the road in the image. Then, output an integer value that says the number of cars. Only output one singular integer value"
 
 message = {
         "role": "user",
@@ -51,7 +51,10 @@ response = client.converse(
 
 output = response['output']['message']
 
-print(f"Role: {output['role']}")
+#print(f"Role: {output['role']}")
 
 for content in output['content']:
-    print(f"Text: {content['text']}")
+    rating = content['text']
+    #print(f"Text: {content['text']}")
+
+print(rating)
