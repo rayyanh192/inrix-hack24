@@ -12,16 +12,24 @@ api_key = os.getenv("API_KEY")
 gmaps = googlemaps.Client(key=api_key)
 addressdata = gmaps.reverse_geocode((37.301153, -121.981205))
 formatted_addy = []
+addressdata2 = gmaps.reverse_geocode((37.7680, -122.3879))
+formatted_addy2 = []
 
 address_arr = []
 for item in addressdata:
     address_arr.append(item['formatted_address'])
 
-formatted_location = address_arr[0]
-print(formatted_location)
+address_arr2 = []
+for item in addressdata2:
+    address_arr2.append(item['formatted_address'])
 
-origin = (37.301153, -121.981205)  # Latitude and Longitude of Saratoga & Payne, San Jose
-destination = (formatted_location)
+formatted_location_dest = address_arr[0]
+print(formatted_location_dest)
+formatted_location_origin = address_arr2[0]
+print(formatted_location_origin)
+
+origin = (formatted_location_origin)  # Latitude and Longitude of Saratoga & Payne, San Jose
+destination = (formatted_location_dest)
 
 result = gmaps.distance_matrix(origin, destination, mode="driving")
 
