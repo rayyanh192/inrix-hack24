@@ -1,12 +1,42 @@
 import requests
 from random import randint
 import googlemaps
+from dotenv import load_dotenv
 from datetime import datetime
+import os
 
-gmaps = googlemaps.Client(key='AIzaSyDHNeKahrDnpQJ7Wb-i6tTrSviE6S7nYfA')
-reverse_geocode_result = gmaps.reverse_geocode((40.714224, -73.961452))
+load_dotenv()
 
-print(reverse_geocode_result)
+api_key = os.getenv("API_KEY")
+
+# print("DEBIGU:" + api_key)
+
+gmaps = googlemaps.Client(key=api_key)
+addressdata = gmaps.reverse_geocode((40.714224, -73.961452))
+formatted_addy = []
+
+streetnum = ""
+road = ""
+city = ""
+state = ""
+zip = ""
+
+for item in addressdata:
+    types = item.get("types", [])
+    if "street_number" in types:
+        streetnum = item.get("long_name", "")
+    elif "route" in types:
+        road = item.get("long_name", "")
+    elif "sublocality" in types or "sublocality_level_1" in types:
+        city = item.get("long_name", "")
+    elif "administrative_area_level_1" in types:
+        state = item.get("short_name", "")
+
+formatted_addy = streetnum + " " + road + ", " + city + ", " + state
+print(addressdata)
+print(formatted_addy)
+
+
 #origin = reverse_geocode_result
 destination = "New York City, NY"
 
