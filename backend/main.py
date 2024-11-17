@@ -42,10 +42,10 @@ def get_distance():
     return distancenum
 
 output = randint(1,100) # will be replaced by the LLM and output from the INIRIX API
-threshold = 10 # subject to change depending on data analysis
+threshold = 10 #subject to change depending on data analysis
 
 
-def evaluate_congestion(congestion_threshold):
+def evaluate_congestion (congestion_threshold):
     if (rating > congestion_threshold):
         return True
     else:
@@ -55,7 +55,7 @@ def checkdistance(dist):
     while True:
         time.sleep(1)
         dist-=1
-        if (dist <= threshold):
+        if (dist <= 10):
             break
     print("Move over, ambulance is coming!")
 
@@ -64,7 +64,7 @@ if (evaluate_congestion(threshold)):
 
 if (not evaluate_congestion(threshold)):
     print("There is not enough traffic")
-
-checkdistance(get_distance())
+else:
+    checkdistance(get_distance())
 
 

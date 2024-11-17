@@ -4,9 +4,16 @@ from PIL import Image
 import io
 import os
 from dotenv import load_dotenv
+from CameraImage import get_camera_image
+from CamerasBox import saveOutput
+from Token import get_token
 
 load_dotenv()
 
+min_id = saveOutput()
+token = get_token()
+
+save_path = get_camera_image(min_id, token)
 
 def get_rating():
     access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
@@ -19,8 +26,7 @@ def get_rating():
         region_name="us-west-2",
     )
 
-    camera_branch
-    image_path = '/Users/rayyan/Downloads/postmantraffic4.jpeg'
+    image_path = save_path
     with open(image_path, 'rb') as image_file:
         image_binary = image_file.read()
 
