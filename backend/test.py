@@ -19,11 +19,17 @@ def get_rating():
         region_name="us-west-2",
     )
 
-    image_path = '/Users/jajoo/Downloads/240119-880-Freeway-Getty-JS-KQED-800x533.jpeg' #
+    camera_branch
+    image_path = '/Users/rayyan/Downloads/postmantraffic4.jpeg'
     with open(image_path, 'rb') as image_file:
         image_binary = image_file.read()
 
-    input_text = "Take the image provided, and count the number of cars that you see on the road in the image. Then, output an integer value that says the number of cars. Only output one singular integer value and no text messages. No messages whatsoever, only output an integer value."
+    #input_text = "Take the image provided, and count the number of cars that you see on the road in the image. Then, output an integer value that says the number of cars. Only output one singular integer value and no text messages. Count the cars on the right side of the road. If you see two red dots that are almost parallel with each other, count that pair as a car."
+    input_text = """
+    Take the image provided, and count the number of cars that you see on the road in the image. Then, output an integer value that says
+    the number of cars. Only output one singular integer value and no text messages. Count the cars on the right side of the road. If you
+    see two red dots that are almost parallel with each other, count that pair as a car.
+    """
 
     message = {
             "role": "user",
@@ -63,3 +69,4 @@ def get_rating():
 
 
 rating = get_rating()
+print(rating)

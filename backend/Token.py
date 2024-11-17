@@ -11,5 +11,5 @@ def get_token():
     response = requests.request("GET", url, headers=headers, data=payload)
 
     token = json.loads(response.text)["result"]["token"]
-    print("Token: " + token)
+    #print("Token: " + token)
     return token
