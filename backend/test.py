@@ -19,11 +19,11 @@ def get_rating():
         region_name="us-west-2",
     )
 
-    image_path = '/Users/aayushkumbhare/Library/Mobile Documents/com~apple~CloudDocs/Downloads/postmantraffic3.jpeg' #
+    image_path = '/Users/jajoo/Downloads/240119-880-Freeway-Getty-JS-KQED-800x533.jpeg' #
     with open(image_path, 'rb') as image_file:
         image_binary = image_file.read()
 
-    input_text = "Take the image provided, and count the number of cars that you see on the road in the image. Then, output an integer value that says the number of cars. Only output one singular integer value and no text messages"
+    input_text = "Take the image provided, and count the number of cars that you see on the road in the image. Then, output an integer value that says the number of cars. Only output one singular integer value and no text messages. No messages whatsoever, only output an integer value."
 
     message = {
             "role": "user",

@@ -2,7 +2,7 @@ import requests
 from random import randint
 import googlemaps
 from dotenv import load_dotenv
-from datetime import datetime
+import time
 import os
 from test import get_rating
 
@@ -12,9 +12,9 @@ rating = int(get_rating())
 gmaps = googlemaps.Client(key=api_key)
 
 def get_distance():
-    addressdata = gmaps.reverse_geocode((37.301153, -121.981205)) # temp coords
+    addressdata = gmaps.reverse_geocode((37.3489, -121.9368)) # temp coords
     formatted_addy = []
-    addressdata2 = gmaps.reverse_geocode((37.7680, -122.3879)) # temp coords
+    addressdata2 = gmaps.reverse_geocode((37.5679, -122.0524)) # temp coords
     formatted_addy2 = []
 
     address_arr = []
@@ -37,7 +37,9 @@ def get_distance():
     distance = result['rows'][0]['elements'][0]['distance']['text']
     duration = result['rows'][0]['elements'][0]['duration']['text']
 
-    return distance
+    distancenum = round(((float(distance.split()[0]))/1.609),2)
+
+    return distancenum
 
 output = randint(1,100) # will be replaced by the LLM and output from the INIRIX API
 threshold = 10 #subject to change depending on data analysis
@@ -49,8 +51,20 @@ def evaluate_congestion (congestion_threshold):
     else:
         return False
 
+def checkdistance(dist):
+    while True:
+        time.sleep(1)
+        dist-=1
+        if (dist <= 10):
+            break
+    print("Move over, ambulance is coming!")
+
 if (evaluate_congestion(threshold)):
-    print(get_distance())
+    print(f"{get_distance()} mi")
 
 if (not evaluate_congestion(threshold)):
     print("There is not enough traffic")
+
+checkdistance(get_distance())
+
+
