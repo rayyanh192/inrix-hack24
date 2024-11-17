@@ -29,7 +29,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col items-center mt-[30px]">
          <MyLink url="/About" text="ABOUT" />
-          <MyLink text="APP" url="/APP"></MyLink>
+          <MyLink text="APP" url="/App"></MyLink>
         </div>
       </main>
       <footer className="">
