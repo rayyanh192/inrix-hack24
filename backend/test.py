@@ -19,6 +19,7 @@ def get_rating():
         region_name="us-west-2",
     )
 
+    camera_branch
     image_path = '/Users/rayyan/Downloads/postmantraffic4.jpeg'
     with open(image_path, 'rb') as image_file:
         image_binary = image_file.read()
