@@ -9,44 +9,29 @@ load_dotenv()
 
 api_key = os.getenv("API_KEY")
 
-# print("DEBIGU:" + api_key)
-
 gmaps = googlemaps.Client(key=api_key)
-addressdata = gmaps.reverse_geocode((40.714224, -73.961452))
+addressdata = gmaps.reverse_geocode((37.301153, -121.981205))
 formatted_addy = []
 
-streetnum = ""
-road = ""
-city = ""
-state = ""
-zip = ""
-
+address_arr = []
 for item in addressdata:
-    types = item.get("types", [])
-    if "street_number" in types:
-        streetnum = item.get("long_name", "")
-    elif "route" in types:
-        road = item.get("long_name", "")
-    elif "sublocality" in types or "sublocality_level_1" in types:
-        city = item.get("long_name", "")
-    elif "administrative_area_level_1" in types:
-        state = item.get("short_name", "")
+    address_arr.append(item['formatted_address'])
 
-formatted_addy = streetnum + " " + road + ", " + city + ", " + state
-print(addressdata)
-print(formatted_addy)
+formatted_location = address_arr[0]
+print(formatted_location)
+
+origin = (37.301153, -121.981205)  # Latitude and Longitude of Saratoga & Payne, San Jose
+destination = (formatted_location)
+
+result = gmaps.distance_matrix(origin, destination, mode="driving")
 
 
-#origin = reverse_geocode_result
-destination = "New York City, NY"
+distance = result['rows'][0]['elements'][0]['distance']['text']
+duration = result['rows'][0]['elements'][0]['duration']['text']
 
-#result = gmaps.distance_matrix(origin, destination, mode="driving")
+print(f"Distance: {distance}")
+print(f"Duration: {duration}")
 
-#distance = result['rows'][0]['elements'][0]['distance']['text']
-#duration = result['rows'][0]['elements'][0]['duration']['text']
-
-#print(f"Distance: {distance}")
-#print(f"Duration: {duration}")
 output = randint(1,100) # will be replaced by the LLM and output from the INIRIX API
 threshold = 30 #subject to change depending on data analysis
 
